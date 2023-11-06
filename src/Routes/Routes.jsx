@@ -6,6 +6,10 @@ import Home from "../Home/Home";
 import Register from "../Authentication/Register/Register";
 import Login from "../Authentication/Login/Login";
 import SignOut from "../Authentication/SignOut/SignOut";
+import Assignments from "../Pages/Assignments/Assignments";
+
+import MyAssignments from "../Pages/MyAssignments/MyAssignments";
+import CreatAssignments from "../Pages/CreateAssignments/CreatAssignments";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +31,15 @@ const router = createBrowserRouter([
         {
           path: "/signOut",
           element: <SignOut></SignOut>,
+        },
+        {
+          path: "/assignment",
+          element: <Assignments></Assignments>,
+        },
+        {
+          path: "/create-assignment",
+          element:<CreatAssignments></CreatAssignments>
+          ,
         },
       ],
     },
