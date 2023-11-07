@@ -1,14 +1,21 @@
-import  { useState } from "react";
+import  { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from "sweetalert";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const CreatAssignments = () => {
+    const {user} = useContext(AuthContext)
+
+    const userEmail = user?.email
+     
     
     const [startDate, setStartDate] = useState(new Date());
 
     const [isOpen, setIsOpen] = useState(false)
     const [selectOp, setSelectOp] = useState('Difficulty level')
+  
+    
     const dropDown = () =>
     {
         setIsOpen(!isOpen)
@@ -18,26 +25,48 @@ const CreatAssignments = () => {
         setSelectOp(option)
         setIsOpen(false)
     }
+  
+ 
 
     const handelSubmit = e =>
     {
         e.preventDefault();
         const form = e.target;
         const title = form.title.value;
+        const email = form.email.value;
         const description = form.description.value;
         const thumbnail = form.thumbnail.value;
         const mark = form.mark.value;
-        console.log(title, description, thumbnail, mark, selectOp,startDate)
 
-        swal("Successfully Added")
+    //     if(selectOp === 'Difficulty level')
+    // {
+    //    console.log("Select an difficulty")
+    // }
+        const addAssignments = {title, description, thumbnail, mark, selectOp,startDate,email}
+
+       
 
         form.reset();
+        fetch('http://localhost:5000/assignments',{
+            method:'POST',
+            headers: {
+                'content-type' : 'application/json '
+            },
+            body: JSON.stringify(addAssignments)
+        })
+        .then(res => res.json())
+        .then(data => 
+          {
+              console.log(data)
+              swal("Successfully Added")
+  
+          })
     }
 
   
     return (
         <div>
-            <h1 className="text-3xl font-bold flex justify-center">Creat An Assignment</h1>
+            <h1 className="text-3xl font-bold flex justify-center mb-6">Creat An Assignment</h1>
             <div className="hero   lg:p-24 ">
   <div className=" flex-col lg:flex-row-reverse">
     <div className="text-center">
@@ -46,6 +75,15 @@ const CreatAssignments = () => {
       <form
       onSubmit={handelSubmit}
       className="card-bod lg:p-11">
+         <div className="form-control">
+          <label className="label">
+            <span className="label-text">Creator Mail</span>
+          </label>
+          <input type="email" placeholder="Email" 
+          name="email"
+          defaultValue={userEmail}
+          className="input input-bordered" required />
+        </div>
       <div className="form-control">
           <label className="label">
             <span className="label-text">Title</span>
@@ -100,6 +138,9 @@ Image URL</span>
         </div>
 
         <div className="form-control mt-7 flex justify-center items-center">
+        <label className="label">
+            <span className="label-text">Deadline</span>
+          </label>
 
         <DatePicker
       showIcon
@@ -113,6 +154,7 @@ Image URL</span>
         </div>
       </form>
     </div>
+   
   </div>
 </div>
 
