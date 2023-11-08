@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import AssignmentShow from "./AssignmentShow";
+import Swal from "sweetalert2";
 
 const Assignments = () => {
     const [assignments, setAssignments] = useState([]);
@@ -31,7 +32,37 @@ const Assignments = () => {
         
     }
 
-    
+    const handelDelete = id =>
+   {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/assignments/${id}`,{
+        method: 'DELETE'
+      })
+      .then(res=> res.json())
+      .then(data =>
+        {
+          console.log(data);
+          if(data.deletedCount>0)
+          {
+            Swal.fire('Deleted!', 'Your item has been deleted.', 'success');
+            const remaining = assignments.filter(assignment => assignment._id !== id)
+            setAssignments(remaining)
+          }
+        })
+       
+      }
+    });
+   }
 
    
     return (
@@ -69,12 +100,14 @@ const Assignments = () => {
     assignments?.map((assignment) => <AssignmentShow
     key={assignment._id}
     assignment = {assignment}
+    handelDelete = {handelDelete}
     ></AssignmentShow>)
 
     : search?.map(assignment =>
         <AssignmentShow
         key={assignment._id}
         assignment={assignment}
+        handelDelete = {handelDelete}
         ></AssignmentShow>)
    
 }

@@ -1,12 +1,16 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import swal from 'sweetalert';
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
 const Login = () => {
     const [success, setSuccess] = useState('');
     const [error, setError] = useState('')
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location, navigate)
+    
     const {googleSignIn, SignIn} = useContext(AuthContext)
     const handelLogin = e =>
     {
@@ -23,7 +27,9 @@ const Login = () => {
       .then(result =>
          { console.log(result.user);
           setSuccess('Successfully')
+          
             swal("login suscessful")
+            navigate(location?.state? location.state: '/')
         }
           )
           .catch(error =>
@@ -39,6 +45,7 @@ const Login = () => {
         console.log(result.user);
         setSuccess('Successfully')
         swal("login suscessful")
+        navigate(location?.state? location.state: '/')
         
        
       }

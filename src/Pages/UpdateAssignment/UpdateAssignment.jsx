@@ -44,7 +44,7 @@ const UpdateAssignment = () => {
         const updateAssignments = {title, description, thumbnail, mark,difficulty ,date,email}
         console.log(updateAssignments)
 
-       
+       console.log(_id)
 
         form.reset();
         fetch(`http://localhost:5000/assignments/${_id}`,{

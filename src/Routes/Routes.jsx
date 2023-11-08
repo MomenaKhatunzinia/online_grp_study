@@ -7,22 +7,25 @@ import Register from "../Authentication/Register/Register";
 import Login from "../Authentication/Login/Login";
 import SignOut from "../Authentication/SignOut/SignOut";
 import Assignments from "../Pages/Assignments/Assignments";
-
-// import MyAssignments from "../Pages/MyAssignments/MyAssignments";
 import CreatAssignments from "../Pages/CreateAssignments/CreatAssignments";
 import ViewAssignment from "../Pages/ViewAssignment/ViewAssignment";
 import UpdateAssignment from "../Pages/UpdateAssignment/UpdateAssignment";
 import Submission from "../Pages/Submission/Submission";
 import SubmittedAssignment from "../Pages/SubmittedAssignment/SubmittedAssignment";
+import PrivateRoute from "../Routes/PrivateRoute/PrivateRoute"
+import MyAssignments from "../Pages/MyAssignments/MyAssignments";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Root></Root>,
+      errorElement:<ErrorPage></ErrorPage>,
       children: [
         {
           path: "/",
           element: <Home></Home>,
+          
         },
         {
           path: "/register",
@@ -42,7 +45,9 @@ const router = createBrowserRouter([
         },
         {
           path: "/create-assignment",
-          element:<CreatAssignments></CreatAssignments>
+          element:<PrivateRoute>
+            <CreatAssignments></CreatAssignments>
+          </PrivateRoute>
           ,
         },
         {
@@ -51,24 +56,30 @@ const router = createBrowserRouter([
           
         },
         {
+          path: "/my-assignment",
+          element:<MyAssignments></MyAssignments>,
+
+          
+        },
+        {
           path: "/viewAssignment/:_id",
-          element:<ViewAssignment></ViewAssignment>,
+          element:<PrivateRoute><ViewAssignment></ViewAssignment></PrivateRoute>,
           loader:({params}) => fetch(`http://localhost:5000/assignments/View/${params._id}`)
         },
         {
           path: "/UpdateAssignment/:_id",
-          element:<UpdateAssignment></UpdateAssignment>,
+          element:<PrivateRoute><UpdateAssignment></UpdateAssignment></PrivateRoute>,
           loader:({params}) => fetch(`http://localhost:5000/assignments/${params._id}`)
           
         },
         {
           path: "/takeAssignment/:mark/:title/:_id",
-          element:<Submission></Submission>,
+          element:<PrivateRoute><Submission></Submission></PrivateRoute>,
           
         },
         {
           path: "/Submittedassignment",
-          element:<SubmittedAssignment></SubmittedAssignment>,
+          element:<PrivateRoute><SubmittedAssignment></SubmittedAssignment></PrivateRoute>,
           loader:()=> fetch('http://localhost:5000/assignments/submitted')
         },
       ],
