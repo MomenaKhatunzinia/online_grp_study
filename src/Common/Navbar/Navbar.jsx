@@ -9,7 +9,7 @@ const Navbar = () => {
     <li><Link to={"/create-assignment"}>Create Assignments</Link></li>
     <li><Link to={"/assignment"}>Assignments</Link></li>
     <li><Link to={"/my-assignment"}>My Assignments</Link></li>
-    <li><Link to={"/Submitted assignment"}>Submitted Assignments</Link></li>
+    <li><Link to={"/Submittedassignment"}>Submitted Assignments</Link></li>
     
     </>
     return (
