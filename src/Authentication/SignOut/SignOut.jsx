@@ -18,8 +18,8 @@ const SignOut = () => {
             <div >
  {
       user? 
-     <div className="flex justify-end 
-     gap-2 mb-6" >
+     <div className=" justify-end 
+     gap-2 mb-6 " >
  
     <div className="group relative
     ">
@@ -31,7 +31,9 @@ const SignOut = () => {
  </div>
     </div>
 
- <button className="brn underline text-pink-700" onClick={handleSignout}>Logout</button>
+      <div className="">
+      <button className="brn underline text-pink-700" onClick={handleSignout}>Logout</button>
+      </div>
 
       </div>
 

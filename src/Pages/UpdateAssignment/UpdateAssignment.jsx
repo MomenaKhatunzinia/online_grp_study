@@ -1,19 +1,20 @@
-import  { useContext, useState } from "react";
+import { useLoaderData } from "react-router-dom";
+import  { useState } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from "sweetalert";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
 
-const CreatAssignments = () => {
-    const {user} = useContext(AuthContext)
 
-    const userEmail = user?.email
+const UpdateAssignment = () => {
+    const loadData = useLoaderData();
+    const {thumbnail, title, description, mark, date, difficulty, email, _id} = loadData;
      
-    
-    const [startDate, setStartDate] = useState(new Date());
+    console.log(loadData)
+
+    const [startDate, setStartDate] = useState(new Date(`${date}`));
 
     const [isOpen, setIsOpen] = useState(false)
-    const [selectOp, setSelectOp] = useState('Difficulty level')
+    const [selectOp, setSelectOp] = useState(`${difficulty}`)
   
     
     const dropDown = () =>
@@ -37,24 +38,24 @@ const CreatAssignments = () => {
         const description = form.description.value;
         const thumbnail = form.thumbnail.value;
         const mark = form.mark.value;
+
         const difficulty = selectOp;
         const date = startDate;
-    //     if(selectOp === 'Difficulty level')
-    // {
-    //    console.log("Select an difficulty")
-    // }
-        const addAssignments = {title, description, thumbnail, mark, difficulty,date,email}
+        const updateAssignments = {title, description, thumbnail, mark,difficulty ,date,email}
+        console.log(updateAssignments)
 
        
 
         form.reset();
-        fetch('http://localhost:5000/assignments',{
-            method:'POST',
+        fetch(`http://localhost:5000/assignments/${_id}`,{
+            method:'PUT',
             headers: {
                 'content-type' : 'application/json '
             },
-            body: JSON.stringify(addAssignments)
+            body: JSON.stringify(updateAssignments)
+           
         })
+       
         .then(res => res.json())
         .then(data => 
           {
@@ -64,11 +65,9 @@ const CreatAssignments = () => {
           })
     }
 
-  
     return (
         <div>
-            <h1 className="text-3xl font-bold flex justify-center mb-6">Creat An Assignment</h1>
-            <div className="hero   lg:p-24 ">
+               <div className="hero   lg:p-24 ">
   <div className=" flex-col lg:flex-row-reverse">
     <div className="text-center">
     </div>
@@ -82,7 +81,7 @@ const CreatAssignments = () => {
           </label>
           <input type="email" placeholder="Email" 
           name="email"
-          defaultValue={userEmail}
+          defaultValue={email}
           className="input input-bordered" required />
         </div>
       <div className="form-control">
@@ -91,6 +90,7 @@ const CreatAssignments = () => {
           </label>
           <input type="text" placeholder="Title" 
           name="title"
+          defaultValue={title}
           className="input input-bordered" required />
         </div>
         <div className="form-control">
@@ -99,6 +99,7 @@ const CreatAssignments = () => {
           </label>
           <input type="text" placeholder="Description" 
           name="description"
+          defaultValue={description}
           className="input input-bordered" required />
         </div>
         <div className="form-control">
@@ -108,6 +109,7 @@ Image URL</span>
           </label>
           <input type="text" placeholder="Thumbnail Image url" 
           name="thumbnail"
+          defaultValue={thumbnail}
           className="input input-bordered" required />
         </div>
         <div className="flex gap-12">
@@ -117,6 +119,7 @@ Image URL</span>
             <span className="label-text">Mark</span>
           </label>
           <input type="text" placeholder="Mark" 
+          defaultValue={mark}
           name="mark"
           className="input input-bordered" required />
         </div>
@@ -158,12 +161,9 @@ Image URL</span>
    
   </div>
 </div>
-
-
-           
-
+            
         </div>
     );
 };
 
-export default CreatAssignments;
+export default UpdateAssignment;
