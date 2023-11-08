@@ -12,6 +12,7 @@ import Assignments from "../Pages/Assignments/Assignments";
 import CreatAssignments from "../Pages/CreateAssignments/CreatAssignments";
 import ViewAssignment from "../Pages/ViewAssignment/ViewAssignment";
 import UpdateAssignment from "../Pages/UpdateAssignment/UpdateAssignment";
+import Submission from "../Pages/Submission/Submission";
 
 const router = createBrowserRouter([
     {
@@ -49,14 +50,19 @@ const router = createBrowserRouter([
           
         },
         {
-          path: "/viewAssignment",
+          path: "/viewAssignment/:_id",
           element:<ViewAssignment></ViewAssignment>,
-          
+          loader:({params}) => fetch(`http://localhost:5000/assignments/View/${params._id}`)
         },
         {
           path: "/UpdateAssignment/:_id",
           element:<UpdateAssignment></UpdateAssignment>,
           loader:({params}) => fetch(`http://localhost:5000/assignments/${params._id}`)
+          
+        },
+        {
+          path: "/takeAssignment",
+          element:<Submission></Submission>,
           
         },
       ],
