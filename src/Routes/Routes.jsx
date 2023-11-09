@@ -15,6 +15,7 @@ import SubmittedAssignment from "../Pages/SubmittedAssignment/SubmittedAssignmen
 import PrivateRoute from "../Routes/PrivateRoute/PrivateRoute"
 import MyAssignments from "../Pages/MyAssignments/MyAssignments";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import ContactUs from "../Pages/ContaceUs/ContactUs"
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         {
           path: "/register",
           element: <Register></Register>,
+        },
+        {
+          path: "/contactUs",
+          element: <ContactUs></ContactUs>,
         },
         {
           path: "/login",
@@ -57,7 +62,10 @@ const router = createBrowserRouter([
         },
         {
           path: "/my-assignment",
-          element:<MyAssignments></MyAssignments>,
+          element:<PrivateRoute>
+            <MyAssignments></MyAssignments>
+          </PrivateRoute>,
+          loader:() => fetch(`http://localhost:5000/assignments/submitted`)
 
           
         },

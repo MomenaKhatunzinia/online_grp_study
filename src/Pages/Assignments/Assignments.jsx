@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import AssignmentShow from "./AssignmentShow";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Assignments = () => {
     const [assignments, setAssignments] = useState([]);
    
     const [search, setSearch] = useState('');
+
+    const {user} = useContext(AuthContext)
 
 
 
@@ -45,7 +48,7 @@ const Assignments = () => {
       cancelButtonColor: '#3085d6',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/assignments/${id}`,{
+        fetch(`http://localhost:5000/assignments/${user?.email}/${id}`,{
         method: 'DELETE'
       })
       .then(res=> res.json())
