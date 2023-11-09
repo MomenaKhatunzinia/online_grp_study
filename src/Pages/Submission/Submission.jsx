@@ -20,7 +20,7 @@ const Submission = () => {
         console.log(submission)
 
         e.target.reset();
-        fetch('http://localhost:5000/assignments/submitted',{
+        fetch('https://online-grpstudy-asg-server.vercel.app/assignments/submitted',{
             method:'POST',
             headers: {
                 'content-type' : 'application/json '
@@ -42,8 +42,9 @@ const Submission = () => {
              <form 
              onSubmit={handelSubmit}
              className="card-body">
-             <input type="file" 
+            <input type="text" 
              name="pdfFile"
+             placeholder="PDF file Link"
              className="file-input file-input-bordered file-input-primary w-full max-w-xs" />
              <textarea className="textarea textarea-primary" placeholder="Quick Note"
              name="quickNote"

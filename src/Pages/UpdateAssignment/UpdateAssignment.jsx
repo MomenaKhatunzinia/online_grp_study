@@ -47,7 +47,7 @@ const UpdateAssignment = () => {
        console.log(_id)
 
         form.reset();
-        fetch(`http://localhost:5000/assignments/${_id}`,{
+        fetch(`https://online-grpstudy-asg-server.vercel.app/assignments/${_id}`,{
             method:'PUT',
             headers: {
                 'content-type' : 'application/json '

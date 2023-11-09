@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import AssignmentShow from "./AssignmentShow";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import swal from "sweetalert";
 
 const Assignments = () => {
     const [assignments, setAssignments] = useState([]);
@@ -14,7 +15,7 @@ const Assignments = () => {
 
 
     useEffect(() => {
-      fetch('http://localhost:5000/assignments')
+      fetch('https://online-grpstudy-asg-server.vercel.app/assignments')
         .then((res) => res.json())
         .then((data) => {
           setAssignments(data);
@@ -48,7 +49,7 @@ const Assignments = () => {
       cancelButtonColor: '#3085d6',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/assignments/${user?.email}/${id}`,{
+        fetch(`https://online-grpstudy-asg-server.vercel.app/assignments/${user?.email}/${id}`,{
         method: 'DELETE'
       })
       .then(res=> res.json())
@@ -60,6 +61,9 @@ const Assignments = () => {
             Swal.fire('Deleted!', 'Your item has been deleted.', 'success');
             const remaining = assignments.filter(assignment => assignment._id !== id)
             setAssignments(remaining)
+          }
+          else{
+            swal("Cannot delete another user Created Assignment")
           }
         })
        

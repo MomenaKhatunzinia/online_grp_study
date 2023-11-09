@@ -1,6 +1,7 @@
 import Banner from "./Banner/Banner";
 import Feature from "./Feature/Feature";
 import Faq from "./faq/faq";
+import Upcomming from "./UpComming/Upcomming"
 
 
 const Home = () => {
@@ -9,6 +10,8 @@ const Home = () => {
             <Banner></Banner>
             <Feature></Feature>
             <Faq></Faq>
+            <Upcomming></Upcomming>
+         
         </div>
     );
 };

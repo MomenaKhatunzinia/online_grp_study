@@ -48,7 +48,7 @@ const CreatAssignments = () => {
        
 
         form.reset();
-        fetch('http://localhost:5000/assignments',{
+        fetch('https://online-grpstudy-asg-server.vercel.app/assignments',{
             method:'POST',
             headers: {
                 'content-type' : 'application/json '

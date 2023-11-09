@@ -18,7 +18,7 @@ const ShowSubmittedAsg = ({data}) => {
         const updateStatus = {status,marked,feedback}
         console.log(updateStatus)
 
-        fetch(`http://localhost:5000/assignments/submitted/${_id}`,{
+        fetch(`https://online-grpstudy-asg-server.vercel.app/assignments/submitted/${_id}`,{
             method:'PUT',
             headers: {
                 'content-type' : 'application/json '

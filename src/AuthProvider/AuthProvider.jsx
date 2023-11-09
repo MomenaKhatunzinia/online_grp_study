@@ -46,7 +46,7 @@ const AuthProvider = ({children}) => {
         if(currentUser)
         {
            
-            axios.post('http://localhost:5000/jwt',loggedUser, {withCredentials: true})
+            axios.post('https://online-grpstudy-asg-server.vercel.app/jwt',loggedUser, {withCredentials: true})
             .then(res =>
                 {
                     console.log(res.data)
@@ -56,7 +56,7 @@ const AuthProvider = ({children}) => {
         }
         else 
         {
-            axios.post('http://localhost:5000/logout', loggedUser, {
+            axios.post('https://online-grpstudy-asg-server.vercel.app/logout', loggedUser, {
                 withCredentials: true
             })
             .then(res =>
