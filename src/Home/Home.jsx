@@ -4,6 +4,7 @@ import Faq from "./faq/faq";
 import Upcomming from "./UpComming/Upcomming"
 
 
+
 const Home = () => {
     return (
         <div >
@@ -11,7 +12,7 @@ const Home = () => {
             <Feature></Feature>
             <Faq></Faq>
             <Upcomming></Upcomming>
-         
+           
         </div>
     );
 };

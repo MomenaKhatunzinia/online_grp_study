@@ -17,7 +17,7 @@ const ShowSubmittedAsg = ({data}) => {
 
         const updateStatus = {status,marked,feedback}
         console.log(updateStatus)
-
+//https://online-grpstudy-asg-server.vercel.app/assignments/submitted/654c6b1dbc44b8abeb91fa94
         fetch(`https://online-grpstudy-asg-server.vercel.app/assignments/submitted/${_id}`,{
             method:'PUT',
             headers: {
@@ -57,7 +57,7 @@ const ShowSubmittedAsg = ({data}) => {
               <p className="py-4 text-black ">Examinee Note : {quickNote}</p>
           
               <form 
-                       onSubmit={handelSubmit}
+                       onSubmit={()=>handelSubmit(_id)}
                        className="card-body text-black">
                      <input type="text" placeholder="Mark here" 
                      name="marked"

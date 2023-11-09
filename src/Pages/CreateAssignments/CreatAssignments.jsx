@@ -39,10 +39,11 @@ const CreatAssignments = () => {
         const mark = form.mark.value;
         const difficulty = selectOp;
         const date = startDate;
-    //     if(selectOp === 'Difficulty level')
-    // {
-    //    console.log("Select an difficulty")
-    // }
+        if(selectOp === 'Difficulty level')
+    {
+       swal("Select an difficulty")
+       return;
+    }
         const addAssignments = {title, description, thumbnail, mark, difficulty,date,email}
 
        
