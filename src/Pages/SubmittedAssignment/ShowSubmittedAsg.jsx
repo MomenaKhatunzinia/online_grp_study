@@ -5,8 +5,9 @@ const ShowSubmittedAsg = ({data}) => {
     const {title,mark,userEmail,pdfFile, quickNote,_id,status} = data;
     console.log(data)
 
-    const handelSubmit = (e) =>
+    const handelSubmit = (e,id) =>
     {
+      console.log("hi")
         
         e.preventDefault ();
         const form = e.target;
@@ -18,7 +19,7 @@ const ShowSubmittedAsg = ({data}) => {
         const updateStatus = {status,marked,feedback}
         console.log("update data",updateStatus)
 
-        fetch(`https://online-grpstudy-asg-server.vercel.app/assignments/submitted/${_id}`,{
+        fetch(`https://online-grpstudy-asg-server.vercel.app/assignments/submitted/${id}`,{
             method:'PUT',
             headers: {
                 'content-type' : 'application/json '
