@@ -9,7 +9,7 @@ const ShowSubmittedAsg = ({data}) => {
     {
       console.log("hi")
         
-        e.preventDefault ();
+      e.preventDefault();
         const form = e.target;
         const marked = form.marked.value;
         const feedback = form.feedback.value;
@@ -58,7 +58,7 @@ const ShowSubmittedAsg = ({data}) => {
               <p className="py-4 text-black ">Examinee Note : {quickNote}</p>
           
               <form 
-                       onSubmit={()=>handelSubmit(_id)}
+                       onSubmit={(e)=>handelSubmit(e,_id)}
                        className="card-body text-black">
                      <input type="text" placeholder="Mark here" 
                      name="marked"
